@@ -1,0 +1,251 @@
+@CHARSET "ISO-8859-1";
+
+html 
+{
+    height: 100%;
+    width: 100%;
+}
+
+body
+{
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.header
+{
+	background-color: #000000;
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	top: 0px;    
+	left: 0px;
+	width: 100%;
+	height: 50px;
+	overflow: hidden;
+	font-family:arial;
+		
+}
+
+.db2Logo
+{
+	background-image: url(db2.gif);
+	background-size: auto 100%;	
+	width: 80px;
+	height: 100%;		
+	background-repeat: no-repeat;
+	display: inline-block;
+	vertical-align:middle;
+
+}
+
+.headerTitle
+{
+	color: rgb(255,255,255);	
+	vertical-align:middle;	    	
+	display: inline-block;
+	font-weight: 600;
+}
+
+.logindiv
+{
+	color: rgb(255,255,255);	
+	vertical-align:middle;	    	
+	display: inline-block;	
+	border:2px solid #EFEFEC;	
+	width: 80px;
+	height: 25px;
+	text-align: center;
+	line-height: 24px;
+	border-radius: 4px;
+	cursor: pointer;
+	font-family: Courier New;
+}
+
+.logindiv:hover
+{
+	background-color: rgb(255,255,255);
+	color: #000000;
+}
+
+.loginspan
+{
+	display: inline-block;
+  	vertical-align: middle;
+  	line-height: normal; 
+}
+
+.signup
+{
+	color: rgb(255,255,255);	
+	vertical-align:middle;	    		
+	display: inline-block;
+	border:2px solid #EFEFEC;
+}
+
+
+.main {
+	margin: 0;
+	padding: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #0099CC;
+    
+	/* Internet Explorer 10 */
+	display:-ms-flexbox;
+	
+	/* Firefox */
+	display:-moz-box;
+
+	/* Safari, Opera, and Chrome */
+	display:-webkit-box;
+	
+	/* W3C */
+    display:box;
+	
+	display: flex;
+
+}
+
+
+
+.filler1
+{
+	margin: 0;
+	padding: 0;	
+	top: 100px;    
+	left: 0px;
+	width: 100%;	
+	height: 200px;
+	position: relative;	
+}
+
+.filler2
+{
+	margin: 0;
+	padding: 0;	
+	top: 100px;    
+	left: 0px;
+	width: 100%;	
+	height: 30px;
+	position: relative;	
+}
+
+.rightsideheaderbuttons
+{
+	padding-top: 12px;
+	padding-right: 20px;
+	display: inline-block;
+	float: right
+}
+
+.filler3
+{
+	margin: 0;
+	padding: 0;	
+	width: 43%;	
+	display: inline-block;
+	position: relative;	
+}
+
+.filler4
+{
+	margin: 0;
+	padding: 0;	
+	width: 10px;	
+	display: inline-block;
+	position: relative;	
+}
+
+.workspace
+{	
+	width:100%;
+	margin: 0;
+	padding: 0;
+	top: 51px;    
+	left: 0px;
+	position: absolute;
+	text-align: center;
+}
+
+.footer
+{
+	background-color:#000000;
+	padding: 0;
+	margin: 0;
+    position: absolute;
+    bottom: 50px;
+    height: 50px;
+    width: 100%;
+    margin-bottom: -50px;
+    left: 0;
+}
+
+.title
+{
+  	color: #FFFFFF;  	
+	font-family: Arial Narrow, Arial;
+	font-weight: normal;	
+	font-size: 50px;
+}
+
+.subTitle
+{
+  	color: #FFFFFF;  	
+	font-family: Arial Narrow, Arial;
+	font-weight: 500;	
+	font-size: 30px;
+}
+
+.titlecenter 
+{
+  	
+  	background-color:#FFFFDB;
+  	color: rgb(0,0,255);
+	font-family:verdana;
+	
+
+	font-size:300%;
+	border:10px solid #EFEFEC;
+	text-align: center;		
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 100px;
+    width: 600px; 
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    
+	/* Internet Explorer 10 */
+	display:-ms-flexbox;
+	-ms-flex-pack:center;
+	-ms-flex-align:center;
+	
+	/* Firefox */
+	display:-moz-box;
+	-moz-box-pack:center;
+	-moz-box-align:center;
+
+	/* Safari, Opera, and Chrome */
+	display:-webkit-box;
+	-webkit-box-pack:center;
+	-webkit-box-align:center;
+	
+	/* W3C */
+    display:box;
+	box-pack:center;
+	box-align:center;
+	
+	display: flex;
+    /* Vertical align: */
+    align-items: center;
+    /* Horizontal align: */
+    justify-content: center;
+}

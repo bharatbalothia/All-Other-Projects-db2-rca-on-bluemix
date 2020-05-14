@@ -1,0 +1,110 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:osgi="http://www.springframework.org/schema/osgi"
+	xmlns:util="http://www.springframework.org/schema/util" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="
+       	http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd" >
+
+	<util:map id="metricBucketRelation_DbLevel" 
+			key-type="java.lang.String" 
+			value-type="java.lang.String">				
+		<!-- IO Bottleneck Matrices -->
+		<entry key="POOL_READ_TIME" value="IO" />
+		<entry key="POOL_WRITE_TIME" value="IO" />
+		<entry key="DIRECT_READ_TIME" value="IO" />
+		<entry key="DIRECT_WRITE_TIME" value="IO" />
+		<!-- LOG Bottleneck Matrices -->
+		<!-- entry key="SUM_LOG_WRITE_TIME" value="LOG" /-->
+		<entry key="LOG_DISK_WAIT_TIME" value="LOG" />
+		<!-- entry key="SUM_LOG_DISK_WRITE_TIME" value="LOG" /-->
+		<entry key="LOG_BUFFER_WAIT_TIME" value="LOG" />
+		<!-- CPU Bottleneck Matrices -->
+		<entry key="TOTAL_SECTION_PROC_TIME" value="CPU" />
+		<!-- entry key="SUM_TOTAL_SORT_TIME" value="CPU" /-->
+		<entry key="TOTAL_COMMIT_PROC_TIME" value="CPU" />
+		<entry key="TOTAL_COMPILE_PROC_TIME" value="CPU" />
+		<!-- LOCK Bottleneck Matrices -->
+		<entry key="LOCK_WAIT_TIME" value="LOCK" />
+		<entry key="TOTAL_EXTENDED_LATCH_WAIT_TIME" value="LOCK" />
+		<!-- NETWORK Bottleneck Matrices -->
+		<entry key="TCPIP_SEND_WAIT_TIME" value="NETWORK" />
+		<entry key="TCPIP_RECV_WAIT_TIME" value="NETWORK" />
+		<entry key="IPC_SEND_WAIT_TIME" value="NETWORK" />
+		<entry key="IPC_RECV_WAIT_TIME" value="NETWORK" />
+	</util:map>
+
+	<util:map id="metricNameDBColumnNameRelation_DbLevel" 
+			key-type="java.lang.String" 
+			value-type="java.lang.String">		
+		<!-- IO Bottleneck Matrices -->
+		<entry key="POOL_READ_TIME" value="POOL_READ_TIME" />
+		<entry key="POOL_WRITE_TIME" value="POOL_WRITE_TIME" />
+		<entry key="DIRECT_READ_TIME" value="DIRECT_READ_TIME" />
+		<entry key="DIRECT_WRITE_TIME" value="DIRECT_WRITE_TIME" />
+		<!-- LOG Bottleneck Matrices -->
+		<!-- entry key="SUM_LOG_WRITE_TIME" value="SUM_LOG_WRITE_TIME" /-->
+		<entry key="LOG_DISK_WAIT_TIME" value="LOG_DISK_WAIT_TIME" />
+		<!-- entry key="SUM_LOG_DISK_WRITE_TIME" value="SUM_LOG_DISK_WRITE_TIME" /-->
+		<entry key="LOG_BUFFER_WAIT_TIME" value="LOG_BUFFER_WAIT_TIME" />
+		<!-- CPU Bottleneck Matrices -->
+		<entry key="TOTAL_SECTION_PROC_TIME" value="TOTAL_SECTION_PROC_TIME" />
+		<!-- entry key="SUM_TOTAL_SORT_TIME" value="SUM_TOTAL_SORT_TIME" /-->
+		<entry key="TOTAL_COMMIT_PROC_TIME" value="TOTAL_COMMIT_PROC_TIME" />
+		<entry key="TOTAL_COMPILE_PROC_TIME" value="TOTAL_COMPILE_PROC_TIME" />
+		<!-- LOCK Bottleneck Matrices -->
+		<entry key="LOCK_WAIT_TIME" value="LOCK_WAIT_TIME" />
+		<entry key="TOTAL_EXTENDED_LATCH_WAIT_TIME" value="TOTAL_EXTENDED_LATCH_WAIT_TIME" />
+		<!-- NETWORK Bottleneck Matrices -->
+		<entry key="TCPIP_SEND_WAIT_TIME" value="TCPIP_SEND_WAIT_TIME" />
+		<entry key="TCPIP_RECV_WAIT_TIME" value="TCPIP_RECV_WAIT_TIME" />
+		<entry key="IPC_SEND_WAIT_TIME" value="IPC_SEND_WAIT_TIME" />
+		<entry key="IPC_RECV_WAIT_TIME" value="IPC_RECV_WAIT_TIME" />	    
+	</util:map>
+	
+	<util:list id="bucketNameList" list-class="java.util.ArrayList">
+		<value>IO</value>
+		<value>CPU</value>
+		<value>LOG</value>
+		<value>LOCK</value>
+		<value>NETWORK</value>
+	</util:list>
+	
+	<util:map id="maxPercentageContributionOfAllComponentsToTotalRequestTimeColumnMappingWithMetrics" 
+			key-type="java.lang.String" 
+			value-type="java.lang.String">			
+		<!-- IO Bottleneck Matrices -->
+		<entry key="POOL_READ_TIME" value="MAX_PCT_POOL_READ_TIME" />
+		<entry key="POOL_WRITE_TIME" value="MAX_PCT_POOL_WRITE_TIME" />
+		<entry key="DIRECT_READ_TIME" value="MAX_PCT_DIRECT_READ_TIME" />
+		<entry key="DIRECT_WRITE_TIME" value="MAX_PCT_DIRECT_WRITE_TIME" />
+		<!-- LOG Bottleneck Matrices -->
+		<!-- entry key="SUM_LOG_WRITE_TIME" value="SUM_LOG_WRITE_TIME" /-->
+		<entry key="LOG_DISK_WAIT_TIME" value="MAX_PCT_LOG_DISK_WAIT_TIME" />
+		<!-- entry key="SUM_LOG_DISK_WRITE_TIME" value="SUM_LOG_DISK_WRITE_TIME" /-->
+		<entry key="LOG_BUFFER_WAIT_TIME" value="MAX_PCT_LOG_BUFFER_WAIT_TIME" />
+		<!-- CPU Bottleneck Matrices -->
+		<entry key="TOTAL_SECTION_PROC_TIME" value="MAX_PCT_TOTAL_SECTION_PROC_TIME" />
+		<entry key="TOTAL_SECTION_SORT_PROC_TIME" value="SUM_TOTAL_SORT_TIME" />
+		<entry key="TOTAL_COMMIT_PROC_TIME" value="MAX_PCT_TOTAL_COMMIT_PROC_TIME" />
+		<entry key="TOTAL_COMPILE_PROC_TIME" value="MAX_PCT_TOTAL_COMPILE_PROC_TIME" />
+		<!-- LOCK Bottleneck Matrices -->
+		<entry key="LOCK_WAIT_TIME" value="MAX_PCT_LOCK_WAIT_TIME" />
+		<entry key="TOTAL_EXTENDED_LATCH_WAIT_TIME" value="MAX_PCT_TOTAL_EXTENDED_LATCH_WAIT_TIME" />
+		<!-- NETWORK Bottleneck Matrices -->
+		<entry key="TCPIP_SEND_WAIT_TIME" value="MAX_PCT_TCPIP_SEND_WAIT_TIME" />
+		<entry key="TCPIP_RECV_WAIT_TIME" value="MAX_PCT_TCPIP_RECV_WAIT_TIME" />
+		<entry key="IPC_SEND_WAIT_TIME" value="MAX_PCT_IPC_SEND_WAIT_TIME" />
+		<entry key="IPC_RECV_WAIT_TIME" value="MAX_PCT_IPC_RECV_WAIT_TIME" />			
+	</util:map>
+	
+</beans>	

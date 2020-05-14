@@ -1,0 +1,10 @@
+applications:
+- services:
+  - sqldb
+  disk_quota: 1024M
+  host: RcaOnBluemix
+  name: RcaOnBluemix
+  path: webStarterApp.war
+  domain: mybluemix.net
+  instances: 1
+  memory: 512M

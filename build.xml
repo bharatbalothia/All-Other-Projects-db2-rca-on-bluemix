@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project basedir="." default="build" name="WebStarterApp">
+    <property environment="env"/>
+    <property name="srcDir" value="."/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.5"/>
+    <property name="source" value="1.5"/>
+    <condition property="ARCHIVE_DIR" value="${env.ARCHIVE_DIR}" else="buildtemp">
+        <isset property="env.ARCHIVE_DIR" />
+    </condition>
+	<property name="warname" value= "webStarterApp.war"/>
+    <path id="classpathDir">
+        <pathelement location="bin"/>
+        <fileset dir="WebContent/WEB-INF/lib">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+	
+    <path id="compileClasspathDir">
+        <pathelement location="bin"/>
+        <fileset dir="WebContent/WEB-INF/lib">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+    <target name="init">
+        <mkdir dir="bin"/>
+    </target>
+    <target name="clean">
+        <delete dir="bin"/>
+    	<delete dir="buildtemp"/>
+		<delete file="${ARCHIVE_DIR}/${warname}" />		
+    </target>
+    <target name="build" depends="build-project,build-war"/>
+    <target name="cleanall" depends="clean"/>
+    <target name="build-project" depends="clean,init">
+    	<copy todir="${ARCHIVE_DIR}">
+	      <fileset file="${ARCHIVE_DIR}/../manifest.yml" /> 
+	    </copy>
+    	<copy todir="${ARCHIVE_DIR}/properties">
+    	  <fileset dir="properties">
+    	  	<include name="**/*"/>	
+    	  </fileset>    		
+    	</copy>
+        <echo message="${ant.project.name}: ${ant.file}"/>
+
+        <javac debug="on" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}"
+		includeantruntime="false">
+            <src path="src"/>
+            <classpath refid="compileClasspathDir"/>
+        </javac>
+
+    </target>
+ 
+   <target name="build-war" depends="build-project">
+	  <war destfile="${ARCHIVE_DIR}/../${warname}" webxml="WebContent/WEB-INF/web.xml" manifest="META-INF/MANIFEST.MF">
+	  	<webinf dir="WebContent/WEB-INF">
+	  		<include name="resources"/>
+	    </webinf>
+	  	<fileset dir="WebContent">
+	  		<include name="**/*"/>	
+	    </fileset>
+	  	<fileset dir=".">
+	  		<include name="properties/**/*"/>
+	    </fileset>
+	  	<fileset file="${ARCHIVE_DIR}/../manifest.yml" />    	
+	  	<classes dir="bin"/>
+	  	<classes dir="properties"/>
+	  </war>   	   
+   		<delete dir="buildtemp"/>
+   </target>
+
+</project>

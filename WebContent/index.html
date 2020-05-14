@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="resources/js/lib/dijit/themes/claro/claro.css">
+	<link rel="stylesheet" href="resources/js/rca/resources/css/appMain.css" media="screen">
+	<title>DB2</title>
+	
+	
+		<script type="text/javascript">
+		var dojoConfig = {
+			
+			parseOnLoad:false,		
+			// Enable the AMD loader
+			async: true,
+			// Define the base URL for all of our modules and packages
+			baseUrl: 'resources/js/lib',
+			// Enable debugging
+			isDebug: true,
+			// Register the packages we are going to be using. These same packages should be defined in the
+			// build profile in `app.profile.js`.
+			packages: [
+				// Using a string as a package is shorthand for `{ name: 'app', location: 'app' }`		
+				{ name: 'rca', location: '../rca' },
+				{ name: 'dijit', location: 'dijit' },
+				{ name: 'dojo', location: 'dojo' },
+				{ name: 'dojox', location: 'dojox' }		
+			],
+
+			selectorEngine: 'lite',
+			tlmSiblingOfDojo: false
+		};
+	</script>
+	<script type="text/javascript" src="resources/js/lib/dojo/dojo.js"></script>	
+	<script type="text/javascript" src="resources/js/index.js"></script>
+	
+</head>
+
+<body class="claro">
+
+<div id="myWidgetContainer"></div>
+	
+	
+</body>
+</html>

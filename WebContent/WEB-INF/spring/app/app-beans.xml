@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util" 
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<context:property-placeholder />
+	<context:annotation-config/>
+	<context:component-scan base-package="com.ibm.db2.rca" />
+	
+	<beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<beans:property name="locations">
+			<beans:list>				
+				<beans:value>classpath:sql.properties</beans:value>
+				<beans:value>classpath:app.properties</beans:value>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+	
+	<beans:import resource="metric-beans.xml"/>
+	
+	<beans:bean id="application" class="com.ibm.db2.rca.application.Application" autowire="byName">
+	</beans:bean>
+	
+	<beans:bean scope="session"  id="customerSession" class="com.ibm.db2.rca.spring.mvc.CustomerSession" autowire="byName">
+		<aop:scoped-proxy/>		
+	</beans:bean>
+	
+	<beans:bean scope="prototype"  id="metric" class="com.ibm.db2.rca.business.objects.Metric" autowire="byName"></beans:bean>
+	
+	<beans:bean scope="prototype"  id="bucket" class="com.ibm.db2.rca.business.objects.Bucket" autowire="byName"></beans:bean>
+	
+	<beans:bean scope="prototype"  class="com.ibm.db2.rca.business.objects.MetricCollection" ></beans:bean>
+	
+	<beans:bean scope="prototype"  class="com.ibm.db2.rca.business.objects.BucketCollection" ></beans:bean>
+
+	<beans:bean scope="prototype"  class="com.ibm.db2.rca.service.analyze.dblevel.OutputFromService" ></beans:bean>
+	
+	<beans:bean scope="prototype"  class="com.ibm.db2.rca.service.analyze.io.OutputFromService" ></beans:bean>
+	
+	<!--  SignUp Bean definition starts here -->
+	
+	<beans:bean scope="prototype"  id="signUpService" class="com.ibm.db2.rca.spring.mvc.signup.SignUpService" ></beans:bean>
+	
+	<beans:bean scope="prototype"  id="signUpInputToService" class="com.ibm.db2.rca.spring.mvc.signup.SignUpInputToService" ></beans:bean>
+	
+	<beans:bean scope="prototype"  id="signUpOutputFromService" class="com.ibm.db2.rca.spring.mvc.signup.SignUpOutputFromService" ></beans:bean>
+	
+	<!--  SignUp Bean definition ends here -->
+
+	
+<!-- 	<beans:bean scope="session"  id="inputToService" class="com.ibm.db2.rca.service.integration.InputToService" autowire="byName">
+		<aop:scoped-proxy/>				
+	</beans:bean> -->
+
+	<beans:bean scope="session"  id="dbLevelAnalyzer" class="com.ibm.db2.rca.service.analyze.dblevel.DbLevelAnalyzer" autowire="byName">		
+		<aop:scoped-proxy/>		
+	</beans:bean>
+	
+	<beans:bean scope="session"  id="ioLevelAnalyzer" class="com.ibm.db2.rca.service.analyze.io.IoAnalyzer" autowire="byName">
+		<beans:property name="filterCriteriaCorrelationWithDbLevelValueMToEtoThisPropertyValue" 
+			value="${io.bufferpool.read_time.filter_criteria_correlation_with_dblevel_value_MToE_to_this_property_value}"/>			
+		<aop:scoped-proxy/>		
+	</beans:bean>
+	
+<!-- 	<beans:bean scope="session" id="performanceDegradationRootCauseAnalyzer" class="com.ibm.db2.rca.service.analyze.PerformanceDegradationRootCauseAnalyzer">
+		<aop:scoped-proxy/>
+	</beans:bean> -->
+
+</beans:beans>

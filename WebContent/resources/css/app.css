@@ -1,0 +1,40 @@
+.round-button {
+	width:5%;
+	display: inline-block;
+	vertical-align: middle;
+	padding-right: 5%;
+	padding-left: 5%;
+	
+}
+.round-button-circle {
+	width: 50%;
+	height:20;
+	padding-bottom: 50%;
+    border-radius: 50%;
+	
+    overflow:hidden;    
+    background: #4679BD; 
+    box-shadow: 0 0 10px gray;
+}
+.round-button-circle:hover {
+	background:#FFFFFF;
+	color:#000000;
+	cursor: hand; 
+	cursor: pointer;
+}
+.round-button a {
+    display:block;
+
+	width:100%;
+
+	
+
+    vertical-align: middle;
+	text-align:center;
+	
+	color:#e2eaf3;
+    font-family:Verdana;
+    font-size:1.0em;
+    font-weight:normal;
+    text-decoration:none;
+}

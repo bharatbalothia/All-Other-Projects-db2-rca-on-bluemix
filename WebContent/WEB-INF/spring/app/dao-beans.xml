@@ -1,0 +1,675 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:osgi="http://www.springframework.org/schema/osgi"
+	xmlns:util="http://www.springframework.org/schema/util" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="
+       	http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd" >
+	
+		<context:property-placeholder />
+		<context:annotation-config/>
+		<context:component-scan base-package="com.ibm.db2.rca" />
+	
+<!-- 	<bean id="baseDao" class="com.ibm.db2.rca.BaseDAOImpl"> -->
+		
+<!-- 	</bean> -->
+	
+<!-- 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> -->
+<!--         <property name="driverClassName" value="${jdbc.driverClassName}"/> -->
+<!--         <property name="url" value="${jdbc.url}"/> -->
+<!--         <property name="username" value="${jdbc.username}"/> -->
+<!--         <property name="password" value="${jdbc.password}"/> -->
+<!--     </bean> -->
+
+
+    	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/sqldb"/>
+    
+    
+<!--     <bean id="dataSource" class="org.springframework.jdbc.datasource.WebSphereDataSourceAdapter"> -->
+<!--         <property name="targetDataSource" ref="WASdataSource"/> -->
+<!-- 	</bean> -->
+	
+<!-- 	<bean id="dataSource" class="org.springframework.jdbc.datasource.WebSphereDataSourceAdapter"> -->
+<!-- 	   <property name="targetDataSource"> -->
+<!-- 	     <bean class="org.springframework.jndi.JndiObjectFactoryBean"> -->
+<!-- 	       <property name="jndiName" value="jdbc/sqldb"/> -->
+<!-- 	     </bean> -->
+<!-- 	   </property> -->
+<!--  	</bean> -->
+    
+    
+
+	
+	<bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+    	<constructor-arg ref="dataSource"/>
+    </bean> 
+	
+	<bean id="simpleJdbcInsert" class="org.springframework.jdbc.core.simple.SimpleJdbcInsert">
+    	<constructor-arg ref="dataSource"/>
+    </bean> 	
+	
+	
+	<bean id="bufferPoolDao" class="com.ibm.db2.rca.service.analyze.component.bufferpool.BufferPoolDao">
+		
+		<constructor-arg ref="namedParameterJdbcTemplate"/>
+		
+		
+		
+		<property name="daoMethods">
+		
+			<util:map map-class="java.util.HashMap">
+			
+				<!-- queryMaxPercentageContributionOfPoolReadTimeToTotalWaitTime_LevelDatabase -->
+				
+				<entry key="queryMaxPercentageContributionOfPoolReadTimeToTotalWaitTime_LevelDatabase" >
+						
+					<bean class="com.ibm.db2.rca.dao.DaoMethodConfig">
+	
+						<property name="sql" value="${queryMaxPercentageContributionOfPoolReadTimeToTotalWaitTime_LevelDatabase_R1C1_SQL}"/>
+						
+						<property name="sqlParams">
+							<util:list list-class="java.util.ArrayList">
+								<value>startDateTime</value>
+								<value>endDateTime</value>								
+								<value>dbName</value>
+							</util:list>
+						</property>
+						
+						<property name="cardinality" value="R1C1"/>
+	
+						<property name="classNameOfObjectsReturned" value="java.lang.Double"/>							
+												
+					</bean>
+						
+				</entry> <!-- queryMaxPercentageContributionOfPoolReadTimeToTotalWaitTime_LevelDatabase -->
+				
+				
+				<!-- getBufferPoolNameList_LevelBufferPool -->
+				
+				<entry key="getBufferPoolNameList_LevelBufferPool" >
+						
+					<bean class="com.ibm.db2.rca.dao.DaoMethodConfig">	
+						<property name="sql" value="${queryBufferPoolNameList_LevelBufferPool_RnC1_SQL}"/>
+						
+						<property name="sqlParams">
+							<util:list list-class="java.util.ArrayList">
+								<value>startDateTime</value>
+								<value>endDateTime</value>								
+								<value>dbName</value>
+							</util:list>
+						</property>
+						
+						<property name="cardinality" value="RnC1"/>
+	
+						<property name="classNameOfObjectsReturned" value="java.lang.String"/>							
+												
+					</bean>
+						
+				</entry> <!-- getBufferPoolNameList_LevelBufferPool -->
+				
+				
+				<!-- queryBufferPoolReadTimeForAGivenPool_LevelBufferPool -->
+				
+				
+				<entry key="queryBufferPoolReadTimeForAGivenPool_LevelBufferPool" >
+						
+					<bean class="com.ibm.db2.rca.dao.DaoMethodConfig">
+	
+						<property name="sql" value="${queryBufferPoolReadTimeForAGivenPool_LevelBufferPool_RnC1_SQL}"/>
+						
+						<property name="sqlParams">
+							<util:list list-class="java.util.ArrayList">
+								<value>startDateTime</value>
+								<value>endDateTime</value>								
+								<value>dbName</value>
+							</util:list>
+						</property>
+						
+						<property name="cardinality" value="RnC1"/>
+						
+						<property name="listOfOutputSqlColumns">
+					
+							<util:list list-class="java.util.ArrayList">								
+								<value>BP_POOL_READ_TIME</value>
+								<value>DB_POOL_READ_TIME</value>								
+								<value>TS</value>						
+							</util:list>
+							
+						</property>
+												
+												
+					</bean>
+						
+				</entry> <!-- queryBufferPoolReadTimeForAGivenPool_LevelBufferPool -->
+				
+			</util:map>
+			
+			
+		</property>
+		
+	</bean>
+	
+	
+	<bean id="ioLevelAnalyzerDao" class="com.ibm.db2.rca.service.analyze.io.IoLevelAnalyzerDao">
+		
+		<constructor-arg ref="namedParameterJdbcTemplate"/>
+
+		<property name="daoMethods">
+		
+			<util:map map-class="java.util.HashMap">
+			
+				<!-- queryAllBufferPoolReadTimeAlongWithDbPoolReadTime_LevelBufferPool -->
+				
+				<entry key="queryAllBufferPoolReadTimeAlongWithDbPoolReadTime_LevelBufferPool" >
+						
+					<bean class="com.ibm.db2.rca.dao.DaoMethodConfig">
+					
+						<!-- "sql" property will be passed at run time because its a complex SQL built based on case by case -->
+
+						<!-- property name="sql"/ -->
+						
+						<property name="sqlParams">
+							<util:list list-class="java.util.ArrayList">
+								<value>startDateTime</value>
+								<value>endDateTime</value>								
+								<value>dbName</value>
+							</util:list>
+						</property>
+						
+						<property name="cardinality" value="RnCn"/>					
+												
+					</bean>
+						
+				</entry> <!-- queryAllBufferPoolReadTimeAlongWithDbPoolReadTime_LevelBufferPool -->
+				
+				
+				<!-- queryMaxPercentageContributionOfAGivenBufferPoolToDbLevelBufferPoolReadTime_LevelBufferPool -->
+				
+				<entry key="queryMaxPercentageContributionOfAGivenBufferPoolToDbLevelBufferPoolReadTime_LevelBufferPool" >
+						
+					<bean class="com.ibm.db2.rca.dao.DaoMethodConfig">
+					
+						<property name="sql" value="${queryMaxPercentageContributionOfAGivenBufferPoolToDbLevelBufferPoolReadTime_LevelBufferPool_R1C1_SQL}"/>
+						
+						<property name="sqlParams">
+							<util:list list-class="java.util.ArrayList">
+								<value>startDateTime</value>
+								<value>endDateTime</value>								
+								<value>dbName</value>
+								<value>bpName</value>
+							</util:list>
+						</property>
+						
+						<property name="cardinality" value="R1C1"/>
+						
+						<property name="classNameOfObjectsReturned" value="java.math.BigDecimal"/>					
+												
+					</bean>
+						
+				</entry> <!-- queryMaxPercentageContributionOfAGivenBufferPoolToDbLevelBufferPoolReadTime_LevelBufferPool -->
+				
+				<!-- queryBufferPoolNameList -->
+				
+				<entry key="queryBufferPoolNameList" >
+						
+					<bean class="com.ibm.db2.rca.dao.DaoMethodConfig">
+					
+						<property name="sql" value="${queryBufferPoolNameList_LevelBufferPool_RnC1_SQL}"/>
+						
+						<property name="sqlParams">
+							<util:list list-class="java.util.ArrayList">
+								<value>startDateTime</value>
+								<value>endDateTime</value>								
+								<value>dbName</value>
+							</util:list>
+						</property>
+						
+						<property name="cardinality" value="RnC1"/>
+						
+						<property name="classNameOfObjectsReturned" value="java.lang.String"/>
+												
+					</bean>
+						
+				</entry> <!-- queryBufferPoolNameList -->
+				
+				
+				
+			</util:map>
+			
+			
+		</property>
+		
+	</bean>
+	
+	
+	<bean id="dBLevelAnalyzerDao" class="com.ibm.db2.rca.service.analyze.dblevel.DBLevelAnalyzerDao">
+
+		<constructor-arg ref="namedParameterJdbcTemplate"/>
+
+		<property name="daoMethods">
+		
+			<util:map map-class="java.util.HashMap">
+			
+			<!-- queryMaxPercentageContributionOfPoolReadTimeToTotalWaitTime_LevelDatabase -->
+			
+			<entry key="queryMaxPercentageContributionOfPoolReadTimeToTotalWaitTime_LevelDatabase" >
+					
+				<bean class="com.ibm.db2.rca.dao.DaoMethodConfig">
+
+					<property name="sql" value="${queryMaxPercentageContributionOfPoolReadTimeToTotalWaitTime_LevelDatabase_R1C1_SQL}"/>
+					
+					<property name="sqlParams">
+						<util:list list-class="java.util.ArrayList">
+							<value>startDateTime</value>
+							<value>endDateTime</value>								
+							<value>dbName</value>
+						</util:list>
+					</property>
+					
+					<property name="cardinality" value="R1C1"/>
+
+					<property name="classNameOfObjectsReturned" value="java.lang.Double"/>							
+											
+				</bean>
+					
+			</entry> <!-- queryMaxPercentageContributionOfPoolReadTimeToTotalWaitTime_LevelDatabase -->
+			
+			<!-- queryRowsReadVsRowsReturnedRatio_LevelDatabase -->
+			<entry key="queryRowsReadVsRowsReturnedRatio_LevelDatabase" >
+					
+				<bean class="com.ibm.db2.rca.dao.DaoMethodConfig">
+
+					<property name="sql" value="${queryRowsReadVsRowsReturnedRatio_LevelDatabase_RnCn_SQL}"/>
+					
+					<property name="sqlParams">
+						<util:list list-class="java.util.ArrayList">
+							<value>startDateTime</value>
+							<value>endDateTime</value>								
+							<value>dbName</value>
+						</util:list>
+					</property>
+					
+					<property name="cardinality" value="R1C1"/>
+
+					<property name="classNameOfObjectsReturned" value="java.lang.Double"/>							
+											
+				</bean>
+					
+			</entry> <!-- queryRowsReadVsRowsReturnedRatio_LevelDatabase -->
+			
+			<!-- queryMaxReadResponseTime_LevelDatabase -->
+			<entry key="queryMaxReadResponseTime_LevelDatabase" >
+					
+				<bean class="com.ibm.db2.rca.dao.DaoMethodConfig">
+
+					<property name="sql" value="${queryMaxReadResponseTime_LevelDatabase_R1C1_SQL}"/>
+					
+					<property name="sqlParams">
+						<util:list list-class="java.util.ArrayList">
+							<value>startDateTime</value>
+							<value>endDateTime</value>								
+							<value>dbName</value>
+						</util:list>
+					</property>
+					
+					<property name="cardinality" value="R1C1"/>
+
+					<property name="classNameOfObjectsReturned" value="java.lang.Double"/>							
+											
+				</bean>
+					
+			</entry> <!-- queryMaxReadResponseTime_LevelDatabase -->
+			
+			
+			
+			<!-- queryMonitoredDataForAllComponentsBucketize_LevelDatabase ends -->
+			
+			<entry key="queryMonitoredDataForAllComponentsBucketize_LevelDatabase" >
+					
+					<bean class="com.ibm.db2.rca.dao.DaoMethodConfig">
+
+						<property name="sql" value="${queryMonitoredDataForAllComponentsBucketize_LevelDatabase_RnCn_SQL}"/>
+						
+						<property name="sqlParams">
+							<util:list list-class="java.util.ArrayList">
+								<value>startDateTime</value>
+								<value>endDateTime</value>								
+								<value>dbName</value>
+							</util:list>
+						</property>
+						
+						<property name="cardinality" value="RnCn"/>
+
+						<property name="listOfOutputSqlColumns">
+						
+							<util:list list-class="java.util.ArrayList">								
+								<value>IO</value>
+								<value>CPU</value>								
+								<value>NETWORK</value>
+								<value>LOG</value>
+								<value>LOCK</value>								
+								<value>TS</value>
+								<value>TOTAL_RQST_TIME</value>								
+							</util:list>
+							
+						</property>
+						
+					</bean>
+					
+				</entry> <!-- queryMonitoredDataForAllComponentsBucketize_LevelDatabase ends -->
+				
+				
+				
+				<!-- queryMonitoredDataForGivenMetricsBucketize_LevelDatabase Starts -->
+				
+				<entry key="queryMonitoredDataForGivenMetricsBucketize_LevelDatabase" >
+					
+					<bean class="com.ibm.db2.rca.dao.DaoMethodConfig">
+
+						<property name="sql" value="${queryMonitoredDataForGivenMetricsBucketize_LevelDatabase_RnCn_SQL}"/>
+						
+						<property name="sqlParams">
+							<util:list list-class="java.util.ArrayList">
+								<value>startDateTime</value>
+								<value>endDateTime</value>								
+								<value>dbName</value>
+							</util:list>
+						</property>
+						
+						<property name="cardinality" value="RnCn"/>
+
+						<property name="listOfOutputSqlColumns">
+						
+							<util:list list-class="java.util.ArrayList">								
+								<value>TS</value>
+								<value>TOTAL_RQST_TIME</value>								
+							</util:list>
+							
+						</property>
+						
+					</bean>
+					
+				</entry> <!-- queryMonitoredDataForGivenMetricsBucketize_LevelDatabase ends -->
+				
+				
+			
+				<!-- queryMonitoredDataForAllComponents_LevelDatabase -->
+				
+				<entry key="queryMonitoredDataForAllComponents_LevelDatabase" >
+					
+					<bean class="com.ibm.db2.rca.dao.DaoMethodConfig">
+
+						<property name="sql" value="${queryMonitoredDataForAllComponents_LevelDatabase_RnCn_SQL}"/>
+						
+						<property name="sqlParams">
+							<util:list list-class="java.util.ArrayList">
+								<value>startDateTime</value>
+								<value>endDateTime</value>								
+								<value>dbName</value>
+							</util:list>
+						</property>
+						
+						<property name="cardinality" value="RnCn"/>
+
+						<property name="listOfOutputSqlColumns">
+						
+							<util:list list-class="java.util.ArrayList">								
+								<value>TS</value>
+								<value>POOL_READ_TIME</value>
+								<value>POOL_WRITE_TIME</value>								
+								<value>DIRECT_READ_TIME</value>
+								<value>DIRECT_WRITE_TIME</value>
+								
+								<!-- value>SUM_LOG_WRITE_TIME</value> -->								
+								<value>LOG_DISK_WAIT_TIME</value>
+								<!-- <value>SUM_LOG_DISK_WRITE_TIME</value> -->
+								<value>LOG_BUFFER_WAIT_TIME</value>		
+														
+								<value>TOTAL_SECTION_PROC_TIME</value>								
+								<!-- <value>SUM_TOTAL_SORT_TIME</value>	-->	
+								<value>TOTAL_COMMIT_PROC_TIME</value>		
+								<value>TOTAL_COMPILE_PROC_TIME</value>
+								
+								<value>LOCK_WAIT_TIME</value>		
+								<value>TOTAL_EXTENDED_LATCH_WAIT_TIME</value>
+																			
+								<value>TCPIP_SEND_WAIT_TIME</value>		
+								<value>TCPIP_RECV_WAIT_TIME</value>
+								<value>IPC_SEND_WAIT_TIME</value>		
+								<value>IPC_RECV_WAIT_TIME</value>
+								
+								<value>TOTAL_RQST_TIME</value>			
+							</util:list>
+							
+						</property>
+						
+					</bean>
+					
+				</entry> <!-- queryMonitoredDataForAllComponents_LevelDatabase ends -->
+				
+				<!-- queryMaxPercentageContributionOfAllComponentsToTotalRequestTime_LevelDatabase -->
+				
+				<entry key="queryMaxPercentageContributionOfAllComponentsToTotalRequestTime_LevelDatabase" >
+					
+					<bean class="com.ibm.db2.rca.dao.DaoMethodConfig">
+
+						<property name="sql" value="${queryMaxPercentageContributionOfAllComponentsToTotalRequestTime_LevelDatabase_R1Cn_SQL}"/>
+						
+						<property name="sqlParams">
+							<util:list list-class="java.util.ArrayList">
+								<value>startDateTime</value>
+								<value>endDateTime</value>								
+								<value>dbName</value>
+							</util:list>
+						</property>
+						
+						<property name="cardinality" value="R1Cn"/>
+
+						<property name="listOfOutputSqlColumns">						
+							<util:list list-class="java.util.ArrayList">								
+								<value>MAX_PCT_POOL_READ_TIME</value>
+								<value>MAX_PCT_POOL_WRITE_TIME</value>
+								<value>MAX_PCT_DIRECT_READ_TIME</value>
+								<value>MAX_PCT_DIRECT_WRITE_TIME</value>
+								<value>MAX_PCT_LOG_DISK_WAIT_TIME</value>
+								<value>MAX_PCT_LOG_BUFFER_WAIT_TIME</value>
+								<value>MAX_PCT_TOTAL_COMPILE_PROC_TIME</value>
+								<value>MAX_PCT_TOTAL_SECTION_PROC_TIME</value>
+								<value>MAX_PCT_TOTAL_COMMIT_PROC_TIME</value>
+								<value>MAX_PCT_LOCK_WAIT_TIME</value>
+								<value>MAX_PCT_TOTAL_EXTENDED_LATCH_WAIT_TIME</value>								
+								<value>MAX_PCT_TCPIP_SEND_WAIT_TIME</value>
+								<value>MAX_PCT_TCPIP_RECV_WAIT_TIME</value>
+								<value>MAX_PCT_IPC_SEND_WAIT_TIME</value>
+								<value>MAX_PCT_IPC_RECV_WAIT_TIME</value>		
+							</util:list>							
+						</property>
+						
+					</bean>
+					
+				</entry> <!-- queryMaxPercentageContributionOfAllComponentsToTotalRequestTime_LevelDatabase ends -->
+				
+			</util:map> <!-- Map ends -->
+			
+		</property> <!-- daoMethods ends -->
+
+	</bean>
+	
+	<!-- <bean id="metricDao" class="com.ibm.db2.rca.business.objects.MetricDao" autowire="byName">
+
+		<constructor-arg ref="namedParameterJdbcTemplate"/>
+
+		<property name="daoMethods">
+		
+			<util:map map-class="java.util.HashMap">
+			
+				
+				
+			</util:map> Map ends
+			
+		</property> daoMethods ends
+		
+	</bean> -->
+	
+	
+<!-- 	<bean id="restDao" class="com.ibm.db2.rca.rest.RestDao"> -->
+
+<!-- 		<constructor-arg ref="namedParameterJdbcTemplate"/> -->
+
+<!-- 		<property name="daoMethods"> -->
+		
+<!-- 			<util:map map-class="java.util.HashMap"> -->
+			
+<!-- 				getDatabaseListForTheLoggedInCustomer_LevelConfig -->
+				
+<!-- 				<entry key="getDatabaseListForTheLoggedInCustomer_LevelConfig" > -->
+					
+<!-- 					<bean class="com.ibm.db2.rca.dao.DaoMethodConfig"> -->
+
+<!-- 						<property name="sql" value="${queryDatabaseListOfLoggedInCustomer_LevelConfig_RnCn_SQL}"/> -->
+						
+<!-- 						<property name="sqlParams"> -->
+<!-- 							<util:list list-class="java.util.ArrayList"> -->
+<!-- 								<value>customerId</value> -->
+<!-- 							</util:list> -->
+<!-- 						</property> -->
+						
+<!-- 						<property name="cardinality" value="RnCn"/> -->
+
+<!-- 						<property name="listOfOutputSqlColumns">						 -->
+<!-- 							<util:list list-class="java.util.ArrayList">								 -->
+<!-- 								<value>DATABASE_ID</value> -->
+<!-- 								<value>DATABASE_NAME</value> -->
+<!-- 							</util:list>							 -->
+<!-- 						</property> -->
+						
+<!-- 					</bean> -->
+					
+<!-- 				</entry> getDatabaseListForTheLoggedInCustomer_LevelConfig ends -->
+				
+<!-- 			</util:map> Map ends -->
+			
+<!-- 		</property> daoMethods ends -->
+		
+<!-- 	</bean> -->
+
+	<bean id="signUpDao" class="com.ibm.db2.rca.spring.mvc.signup.SignUpDao">
+	
+		<constructor-arg ref="namedParameterJdbcTemplate"/>
+		
+		<constructor-arg ref="simpleJdbcInsert"/>
+		
+		<property name="daoMethods">
+		
+			<util:map map-class="java.util.HashMap">
+			
+				<!-- queryUserExistence -->
+				
+				<entry key="queryUserExistence" >
+						
+					<bean class="com.ibm.db2.rca.dao.DaoMethodConfig">
+	
+						<property name="sql" value="${queryUserExistence_ApplicationSecurity_R1C1_SQL}"/>
+						
+						<property name="sqlParams">
+							<util:list list-class="java.util.ArrayList">
+								<value>emailId</value>
+							</util:list>
+						</property>
+						
+						<property name="cardinality" value="R1C1"/>
+	
+						<property name="classNameOfObjectsReturned" value="java.lang.Integer"/>							
+												
+					</bean>
+						
+				</entry> <!-- queryUserExistence -->
+				
+				<!-- insertUserRecord -->
+				
+				<entry key="insertUserRecord" >
+						
+					<bean class="com.ibm.db2.rca.dao.DaoMethodConfig">
+	
+						<property name="tableName" value="CUSTOMER"/>
+						
+						<property name="schemaName" value="RCACONF"/>
+							
+						<property name="insertSqlColumnsAndBeanPropertiesMap">
+							<util:map
+								key-type="java.lang.String" 
+								value-type="java.lang.String">											
+								<entry key="CUSTOMER_ID" value="emailId" />
+								<entry key="CUSTOMER_NAME" value="organizationName" />
+								<entry key="PASSWORD" value="password" />
+							</util:map>
+						</property>
+												
+					</bean>
+						
+				</entry> <!-- insertUserRecord -->
+
+			</util:map>
+						
+		</property>
+		
+	</bean>
+
+<!-- Start -->
+	<bean id="dataUploadDeltaCalculatorDao" class="com.ibm.db2.rca.dataload.DataUploadDeltaCalculationDao">
+		
+		<constructor-arg ref="namedParameterJdbcTemplate"/>
+
+		<property name="daoMethods">
+		
+			<util:map map-class="java.util.HashMap">
+			
+				<!-- queryMonitoredData_LevelDatabase -->
+				
+				<entry key="queryMonitoredData_LevelDatabase" >
+						
+					<bean class="com.ibm.db2.rca.dao.DaoMethodConfig">
+					
+						<property name="sql" value="${queryMonitoredData_LevelDatabase_RnCn_SQL}"/>
+						
+						<property name="sqlParams">
+							<util:list list-class="java.util.ArrayList">
+								<value>startDateTime</value>
+								<value>endDateTime</value>								
+								<value>dbName</value>
+							</util:list>
+						</property>
+						
+						<!-- Following is commented because the listOfOutputSqlColumns dynamically picked based on the  
+							dbLevelDataLoadDescriptors defined in csv-beans.xml -->
+							
+<!-- 						<property name="listOfOutputSqlColumns"> -->
+<!--  							<util:list list-class="java.util.ArrayList"> -->
+<!-- 							</util:list> -->
+<!--  						</property> -->
+ 						
+						
+						<property name="cardinality" value="RnCn"/>					
+												
+					</bean>
+						
+				</entry> <!-- queryAllBufferPoolReadTimeAlongWithDbPoolReadTime_LevelBufferPool -->
+				
+			</util:map>			
+			
+		</property>
+		
+	</bean>
+<!--  -->
+	
+	
+</beans>

@@ -1,0 +1,25 @@
+
+<div style="width: 100%; height: 100%;">
+	<div data-dojo-type="dijit/layout/BorderContainer" 
+			design="headline" 
+			style="width: 100%; height: 100%;" 
+			data-dojo-attach-point="dataFileUploaderMainBorderContainer">
+			
+		<div data-dojo-type="dijit/layout/ContentPane" region="center">
+
+				<form method="post" action="" id="dataFileUploaderForm" enctype="multipart/form-data" >
+				   <div id="selectFilesButtonId_${widgetId}" data-dojo-attach-point="selectFilesButton"></div>
+				   <div id="submitButtonId_${widgetId}" data-dojo-attach-point="submitButton"></div>
+				</form>
+				
+				<div id="fileListId_${widgetId}" data-dojo-attach-point="fileList"></div>
+
+				<div id="dbNameTextBoxId_${widgetId}" data-dojo-attach-point="dbNameComboBox"></div>
+
+			   	<div id="uploadStatus_${widgetId}" data-dojo-attach-point="uploadStatus"></div>
+			   	
+			   	<div id="clearFileSelection_${widgetId}" data-dojo-attach-point="clearFileSelection"></div>
+			   	
+		</div>
+	</div>
+</div>

@@ -1,0 +1,406 @@
+@CHARSET "ISO-8859-1";
+
+html 
+{
+    height: 100%;
+    width: 100%;
+}
+
+body
+{
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.header
+{
+	background-color: #000000;
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	top: 0px;    
+	left: 0px;
+	width: 100%;
+	height: 50px;
+	overflow: hidden;
+	font-family:arial;
+		
+}
+
+.db2Logo
+{
+	background-image: url(../../resources/images/db2.gif);
+	background-size: auto 100%;	
+	width: 80px;
+	height: 100%;		
+	background-repeat: no-repeat;
+	display: inline-block;
+	vertical-align:middle;
+
+}
+
+.headerTitle
+{
+	color: rgb(255,255,255);	
+	vertical-align:middle;	    	
+	display: inline-block;
+	font-weight: 600;
+}
+
+.logindiv
+{
+	color: rgb(255,255,255);	
+	vertical-align:middle;	    	
+	display: inline-block;	
+	border:2px solid #EFEFEC;	
+	width: 80px;
+	height: 0px;
+	text-align: center;
+	line-height: 24px;
+	border-radius: 4px;
+	cursor: pointer;
+	font-family: Courier New;
+	margin: 0;	
+	padding: 5px 0px 20px 0;
+}
+
+.logindiv:hover
+{
+	background-color: rgb(255,255,255);
+	color: #000000;
+}
+
+.loginDialog
+{
+	width:500px; 
+	height:400px;
+	background-color : #42505E;
+}
+
+.signupDialog
+{
+	width:500px; 
+	height:600px;
+	background-color: #006666;
+	
+}
+
+.passwordValidator {}
+
+.claro .passwordValidator .loginTextBox,
+.claro .loginTextBox
+{
+	 padding: 0 0 5px 10px;	 
+	 height: 23px; 
+	 width: 230px;
+	 text-align: center;	 	 
+	 font-size: 14px;
+	 border-radius: 5px;
+	 font-family: "Segoe UI" , Calibri;
+}
+
+
+.claro .dijitTextBoxFocused {
+	outline: 5px -webkit-focus-ring-color;
+	background-color: #CCFF99;
+}
+
+.loginTextBox:focus 
+{
+    background-color: #CCFF99;
+}
+
+input:PlaceHolder
+{
+	text-align: center !important;
+    #text-align: center !important;
+}
+
+.claro input
+{ 
+	text-align: center !important;
+    #text-align: center !important;
+}
+
+
+
+
+
+.loginTextBoxParentDiv
+{
+	background-color : #FFFFFF;
+	border-radius: 10px;
+	padding: 5px 5px 5px 5px;
+	margin: 2px 20px 20px 20px;
+	height: 30px;
+	width: 250px;
+	overflow: hidden;	
+	vertical-align:middle;
+}
+
+.hline { background-color: #33CCCC; height: 1px; border: 0; }
+
+.signInLabel
+{
+	color: #66FFFF;
+	font-size: 36px;
+	font-family: "Segoe UI Light" , Calibri;
+}
+
+.loginDialogSubmitDiv
+{
+	color: rgb(255,255,255);	
+	vertical-align:middle;		
+	border:5px solid #EFEFEC;	
+	width: 190px;
+	height: 35px;	
+	text-align: center;	
+	border-radius: 10px;
+	cursor: pointer;
+	font-family: "Segoe UI Light" , Calibri;
+	font-size: 24px;
+	margin: 30px 0 20px 20px;
+	padding: 0 0 5px 0;		
+	background-color: #1975A3;
+	overflow: hidden;
+	display: inline-block;
+}
+
+.loginDialogLabel
+{
+	margin: 0 0 0 20px;	
+	color: #66FFFF;
+}
+
+.signUpDialogSpanDiv
+{		
+	color: #66FFFF;
+	text-decoration: underline;
+	cursor: pointer;	
+}
+
+.signupLink
+{
+	color: #CCCCFF;
+}
+
+.signUpDialogSpanDiv:hover {font-weight: bold; color: white;}
+
+.otherLinks
+{
+	align: right;
+	margin: 5px 0 0 0;
+	display: inline-block;
+	width: 250px;
+	height: 35px;
+	vertical-align:middle;
+	text-align: right;
+	line-height: 20px;	
+	
+}
+
+.loginDialogSubmitDiv:hover
+{
+	background-color: #339966;	
+}
+
+.loginButtonSignupForgotPasswordParentDiv
+{
+	align: left;
+	text-align: left;
+	display: block;	
+	width: 500px;
+	margin: 0;
+}
+
+.loginspan
+{
+	display: inline-block;
+   	vertical-align: middle;
+  	line-height: normal; 
+}
+
+.signup
+{
+	color: rgb(255,255,255);	
+	vertical-align:middle;	    		
+	display: inline-block;
+	border:2px solid #EFEFEC;
+}
+
+
+.main {
+	margin: 0;
+	padding: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #0099CC;
+    
+	/* Internet Explorer 10 */
+	display:-ms-flexbox;
+	
+	/* Firefox */
+	display:-moz-box;
+
+	/* Safari, Opera, and Chrome */
+	display:-webkit-box;
+	
+	/* W3C */
+    display:box;
+	
+	display: flex;
+
+}
+
+.status
+{
+	color: #FFFFFF;  	
+	font-family: Arial Narrow, Arial;
+	font-weight: normal;	
+	font-size: 50px;
+	left: 0px;
+	width: 100%;	
+	height: 100px;
+	position: relative;	
+}
+
+.filler1
+{
+	margin: 0;
+	padding: 0;	
+	top: 100px;    
+	left: 0px;
+	width: 100%;	
+	height: 200px;
+	position: relative;	
+}
+
+.filler2
+{
+	margin: 0;
+	padding: 0;	
+	top: 100px;    
+	left: 0px;
+	width: 100%;	
+	height: 30px;
+	position: relative;	
+}
+
+.rightsideheaderbuttons
+{
+	padding-top: 12px;
+	padding-right: 20px;
+	display: inline-block;
+	float: right
+}
+
+.filler3
+{
+	margin: 0;
+	padding: 0;	
+	width: 43%;	
+	display: inline-block;
+	position: relative;	
+}
+
+.filler4
+{
+	margin: 0;
+	padding: 0;	
+	width: 10px;	
+	display: inline-block;
+	position: relative;	
+}
+
+.workspace
+{	
+	width:100%;
+	margin: 0;
+	padding: 0;
+	top: 51px;    
+	left: 0px;
+	position: absolute;
+	text-align: center;
+}
+
+.footer
+{
+	background-color:#000000;
+	padding: 0;
+	margin: 0;
+    position: absolute;
+    bottom: 50px;
+    height: 50px;
+    width: 100%;
+    margin-bottom: -50px;
+    left: 0;
+}
+
+.title
+{
+  	color: #FFFFFF;  	
+	font-family: Arial Narrow, Arial;
+	font-weight: normal;	
+	font-size: 50px;
+}
+
+.subTitle
+{
+  	color: #FFFFFF;  	
+	font-family: Arial Narrow, Arial;
+	font-weight: 500;	
+	font-size: 30px;
+}
+
+.titlecenter 
+{
+  	
+  	background-color:#FFFFDB;
+  	color: rgb(0,0,255);
+	font-family:verdana;
+	
+
+	font-size:300%;
+	border:10px solid #EFEFEC;
+	text-align: center;		
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 100px;
+    width: 600px; 
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    
+	/* Internet Explorer 10 */
+	display:-ms-flexbox;
+	-ms-flex-pack:center;
+	-ms-flex-align:center;
+	
+	/* Firefox */
+	display:-moz-box;
+	-moz-box-pack:center;
+	-moz-box-align:center;
+
+	/* Safari, Opera, and Chrome */
+	display:-webkit-box;
+	-webkit-box-pack:center;
+	-webkit-box-align:center;
+	
+	/* W3C */
+    display:box;
+	box-pack:center;
+	box-align:center;
+	
+	display: flex;
+    /* Vertical align: */
+    align-items: center;
+    /* Horizontal align: */
+    justify-content: center;
+}

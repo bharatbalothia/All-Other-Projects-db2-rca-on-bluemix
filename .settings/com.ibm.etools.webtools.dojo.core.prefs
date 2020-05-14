@@ -1,0 +1,9 @@
+dojo-bootstrap-js=dojo/dojo.js
+dojo-css=dojo/resources/dojo.css
+dojo-deploy-location-option=ProjectSetupProperties.deploy.as.part.of.this.project
+dojo-devicetheme-js=dojox/mobile/deviceTheme.js
+dojo-dijit-css=dijit/themes/dijit.css
+dojo-root=/RcaOnBluemix/WebContent/resources/js
+dojo-source-metadata-root=/RcaOnBluemix/WebContent/resources/js
+dojo-theme-css=dijit/themes/claro/claro.css
+eclipse.preferences.version=1

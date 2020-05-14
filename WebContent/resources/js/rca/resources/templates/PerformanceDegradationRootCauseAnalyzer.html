@@ -1,0 +1,70 @@
+<div class="${baseClass}" id="main">
+	<div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="gutters:true" >        
+        <div class="inputPanel" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top'">
+            
+            <form name="inputForm"  
+	            data-dojo-attach-point="inputForm" 
+	            class="inputForm" 
+	            data-dojo-type="dijit/form/Form" 
+	            id="firstInputFormId" 
+	            data-dojo-id="firstInputFormId"
+				encType="multipart/form-data" 
+				action="" method="">
+				
+				<label class="label" for="fromDateId">From Date Time :</label>
+				
+				<input type="text" name="fromDate" id="fromDateId" 
+					data-dojo-id="fromDateId" data-dojo-type="dijit/form/DateTextBox" required="true"
+					onChange="toDateId.constraints.min = arguments[0];" value="now"/>
+
+				<input type="text" name="fromTime" value="now" data-dojo-id="fromTimeId" id="fromTimeId"
+				    data-dojo-type="dijit/form/TimeTextBox"
+				    data-dojo-attach-event="change: fromTimeValueChanged"	
+				    required="true" />				   
+
+				<label for="toDateId">To Date Time :</label>
+				
+				<input  type="text" name="toDate" data-dojo-type="dijit/form/DateTextBox" required="true" id="toDateId" data-dojo-id="toDateId"
+					onChange="fromDateId.constraints.max = arguments[0];" value="now"/>
+    
+				<input type="text" name="toTime"  value="now" data-dojo-id="toTimeId" id="toTimeId"
+				    data-dojo-type="dijit/form/TimeTextBox"
+				    data-dojo-attach-event="change: toTimeValueChanged"				    
+				    required="true" />
+				
+<!-- 				<label for="dbNameId">Database Name :</label> -->
+<!-- 				<input type="text" name="dbName" data-dojo-id="dbNameId" id="dbNameId" -->
+<!-- 				    data-dojo-type="dijit/form/ComboBox"				     -->
+<!-- 				    required="true" /> -->
+				
+                
+                <button name="analyzeButton" data-dojo-type="dijit/form/Button" id="analyzeButtonId" 
+	                data-dojo-id="analyzeButtonId" type="button" data-dojo-attach-point="analyzeButton"
+	                data-dojo-attach-event='click: submitFormAsJson'>Analyze</button>
+                
+            </form>
+            
+<!--             <form class="inputForm" action="service/logout.do" method="post">				
+				<button name="resetButton" data-dojo-type="dijit/form/Button" id="resetButtonId" 
+	                data-dojo-id="resetButtonId" type="submit" data-dojo-attach-point="resetButton">Reset Session</button>	                
+			</form> -->            
+        </div>
+        
+        <div class="rcaWidgetWorkspace" data-dojo-attach-point="rcaWidgetWorkspace" 
+        	data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'center'" >        	
+        		
+        		
+        		<div class="rcaWidgetWorkspaceChildrenLeft" id="rcaWidgetWorkspaceChildrenLeft">
+        		<hr/>        			
+        		</div>
+        		<div class="rcaWidgetWorkspaceChildrenRight" id="rcaWidgetWorkspaceChildrenRight">
+        		<hr/>        			
+        		</div>
+        		        	        	
+
+        		<div data-dojo-attach-point="rcaOutputPanel" id="rcaOutputPanel"></div>
+        </div>
+        
+    </div>
+
+</div>
